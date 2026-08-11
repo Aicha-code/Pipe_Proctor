@@ -8,7 +8,7 @@ function ProtectedRoute() {
 
   if (!isAuthenticated) {
     // Remember where the user was headed so login can send them back.
-    return <Navigate to={PATHS.login} state={{ from: location }} replace />
+    return <Navigate to={PATHS.signin} state={{ from: location }} replace />
   }
 
   return <Outlet />

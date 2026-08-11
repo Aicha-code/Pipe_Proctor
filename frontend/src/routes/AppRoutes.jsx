@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router'
 import PrivateLayout from '../layouts/PrivateLayout'
 import Dashboard from '../pages/Dashboard'
-import Login from '../pages/Login'
+import ForgotPassword from '../pages/ForgotPassword'
+import Login from '../pages/Signin'
 import Modal from '../pages/Modal'
 import Monitoring from '../pages/Monitoring'
 import NotFound from '../pages/NotFound'
@@ -15,7 +16,8 @@ function AppRoutes() {
     <Routes>
       {/* Public */}
       <Route element={<PublicRoute />}>
-        <Route path={PATHS.login} element={<Login />} />
+        <Route path={PATHS.signin} element={<Login />} />
+        <Route path={PATHS.forgotPassword} element={<ForgotPassword />} />
       </Route>
 
       {/* Protected */}

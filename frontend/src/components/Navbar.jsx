@@ -6,9 +6,9 @@ function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    logout()
-    navigate(PATHS.login, { replace: true })
+  const handleLogout = async () => {
+    await logout()
+    navigate(PATHS.signin, { replace: true })
   }
 
   return (
