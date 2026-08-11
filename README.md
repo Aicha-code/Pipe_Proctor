@@ -17,8 +17,8 @@ The detailed frontend [documentation](/frontend/README.md) is in the frontend fo
 ## How to Run the APP
 #### Clone the repository
 ```bash
-git clone https://github.com/Aicha-code/C.git
-cd https://github.com/Aicha-code/Pipe_Proctor.git
+git clone https://github.com/Aicha-code/Pipe_Proctor.git
+cd Pipe_Proctor/
 ```
 #### Run the Backend
 > To be completed by @UWINTWALI
