@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router'
+import Logo from './Logo'
 import { PATHS } from '../routes/paths'
 
 const LINKS = [
@@ -11,7 +12,7 @@ const LINKS = [
 function Sidebar() {
   return (
     <aside className="w-56 shrink-0 border-r border-slate-200 bg-white p-4">
-      <h2 className="mb-4 text-lg font-semibold text-slate-900">PipeProctor</h2>
+      <Logo className="mb-6 px-1" />
 
       <nav className="flex flex-col gap-1">
         {LINKS.map(({ to, label }) => (
@@ -19,9 +20,9 @@ function Sidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `rounded px-3 py-2 text-sm ${
+              `rounded-lg px-3 py-2 text-sm font-medium ${
                 isActive
-                  ? 'bg-slate-900 text-white'
+                  ? 'bg-brand-700 text-white'
                   : 'text-slate-600 hover:bg-slate-100'
               }`
             }
