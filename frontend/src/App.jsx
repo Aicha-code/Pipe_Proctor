@@ -1,12 +1,12 @@
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+  const [count, setCount] = useState(0)
 
   return (
     <>
-    <div className="w-full flex justify-center">
-     <h1 className="text-3xl font-bold p-10"> PipeProctor</h1>
-    </div>
+     <h1> PipeProctor</h1>
     </>
   )
 }
