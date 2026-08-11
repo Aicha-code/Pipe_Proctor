@@ -19,4 +19,8 @@
   --color-brand-800: #0b5b1c;
   --color-brand-900: #0c4b1b;
   --color-brand-950: #05290e;
+
+  /* Self-hosted via Fontsource — see the imports in main.jsx. */
+  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
