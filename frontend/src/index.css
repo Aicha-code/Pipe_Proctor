@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/*
+ * AI Provided color palette, based on the Niger flag.
+ 
+ * Project accent: the green of the Niger flag (#0DB02B), kept at `brand-500`.
+ * Use `brand-700` or darker behind white text — it is the lightest step that
+ * clears the WCAG AA 4.5:1 contrast ratio.
+ */
+@theme {
+  --color-brand-50: #edfdf2;
+  --color-brand-100: #d3f8dd;
+  --color-brand-200: #a8f0bb;
+  --color-brand-300: #71e08b;
+  --color-brand-400: #35d054;
+  --color-brand-500: #0db02b;
+  --color-brand-600: #099525;
+  --color-brand-700: #0a7621;
+  --color-brand-800: #0b5b1c;
+  --color-brand-900: #0c4b1b;
+  --color-brand-950: #05290e;
+
+  /* Self-hosted via Fontsource — see the imports in main.jsx. */
+  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
