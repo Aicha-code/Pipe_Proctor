@@ -30,10 +30,4 @@ data/
 # dummy files
 
 docs.txt
-
-## debug file
-debug_db.py
-debug_insert.py
-test_api.py
-debug_register.py
-
+docs.md
