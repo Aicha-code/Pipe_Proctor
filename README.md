@@ -1,24 +1,17 @@
 # Pipe Proctor, An Intelligent Satellite-Based Threat Detection and Monitoring System for the Niger–Benin Oil Pipeline
 
 
-## Project Structure
-
-
-### Data cleaning pipeline
-
-### Backend
+This is a backend for the pipe proctor project. Backend use FastAPI framework and SuperBase online database.
 
 ### Frontend
 The detailed frontend [documentation](/frontend/README.md) is in the frontend folder
-
-
-
 
 ## How to Run the APP
 #### Clone the repository
 ```bash
 git clone https://github.com/Aicha-code/Pipe_Proctor.git
-cd https://github.com/Aicha-code/Pipe_Proctor.git
+cd Pipe_Proctor
+code .
 ```
 #### Run the Backend
 > To be completed by @UWINTWALI
@@ -78,23 +71,33 @@ FastAPI automatically provides interactive API documentation at the following lo
 http://127.0.0.1:8000/docs
 ```
 
-#### Run the Frontend
-```bash
-# All command that can be copy-pasted
-cd frontend
-npm install
-npm run dev
-```
 
-## Work plan
 
-| Milestone | Responsible (and Reviegit pull origin feat/frontendwer) | Timeline |
-|-----------|-------------|----------|
-| Frontend | Buhendwa Ange Asifiwe, Uwintwali Jean de Dieu | Aug 10 - Aug 14 |
-| Backend | Uwintwali Jean de Dieu, Buhendwa Ange Asifiwe | Aug 11 - Aug 13 |
-| Data curation and model design | Baraka Jonathan Kashabira, Abari Ilior Aichetou | Aug 8 - Aug 10 |
-| Model Training and Evaluation | Baraka Jonathan Kashabira, Abari Ilior Aichetou | Aug 11 - Aug 13 |
-| Project integration (Model + interface) | Umwintwali Jean de Dieu, Buhendwa Ange, Baraka Jonathan K., Abari Ilioe Aichetou | Aug 14 |
+
+## References
+
+### FastAPI
+
+- [FastAPI Official Documentation](https://fastapi.tiangolo.com/)
+
+### Supabase
+
+- [Supabase Python Client Reference](https://supabase.com/docs/reference/python)
+- [Supabase Documentation](https://supabase.com/docs)
+
+### FastAPI + Supabase Integration
+
+- [Building a Supabase and FastAPI Project: A Modern Backend Stack](https://medium.com/@abhik12295/building-a-supabase-and-fastapi-project-a-modern-backend-stack-52030ca54ddf)
+- [How to Connect and Integrate Supabase with Python: FastAPI](https://hrekov.com/blog/supabase-with-fastapi)
+- [Building a CRUD API with FastAPI and Supabase: A Step-by-Step Guide](https://blog.theinfosecguy.xyz/building-a-crud-api-with-fastapi-and-supabase-a-step-by-step-guide)
+- [FastAPI with Supabase: Production Integration Guide [2026]](https://markaicode.com/integrate/fastapi-with-supabase/)
+- [Integrating FastAPI with Supabase Auth](https://dev.to/j0/integrating-fastapi-with-supabase-auth-780)
+- [Building an API with FastAPI and Supabase](https://medium.com/@lior_amsalem/building-an-api-with-fastapi-and-supabase-c61a74d4e2f4)
+
+
+
+
+
 
 
 
