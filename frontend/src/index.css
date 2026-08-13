@@ -20,6 +20,15 @@
   --color-brand-900: #0c4b1b;
   --color-brand-950: #05290e;
 
+  /*
+   * Severity ramp for detections. These are status colours, not series
+   * colours: every place they appear also carries a text label, so meaning
+   * is never left to hue alone (medium sits below 3:1 on white by design).
+   */
+  --color-severity-low: #0ca30c;
+  --color-severity-medium: #fab219;
+  --color-severity-high: #d03b3b;
+
   /* Self-hosted via Fontsource — see the imports in main.jsx. */
   --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
