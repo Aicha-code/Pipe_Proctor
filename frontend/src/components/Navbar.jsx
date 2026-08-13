@@ -12,13 +12,20 @@ function Navbar() {
   }
 
   return (
-    <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-3">
-      <h2 className="text-sm font-medium text-slate-500">{user?.email}</h2>
+    <header className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-3">
+      <div className="min-w-0">
+        <p className="truncate text-sm font-medium text-slate-900">
+          {user?.name}
+        </p>
+        <p className="truncate text-xs text-slate-500">
+          {user?.role} · {user?.email}
+        </p>
+      </div>
 
       <button
         type="button"
         onClick={handleLogout}
-        className="rounded border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+        className="shrink-0 rounded-lg border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
       >
         Log out
       </button>
