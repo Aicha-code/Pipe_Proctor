@@ -25,9 +25,12 @@ const anchorFor = (km) => {
 function CorridorMap({ detections, selectedId, onSelect }) {
   return (
     <div>
+      {/* Below the min-width the labels would shrink past legibility, so the
+          schematic scrolls instead of squashing. */}
+      <div className="overflow-x-auto">
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-        className="w-full"
+        className="w-full min-w-[44rem]"
         role="img"
         aria-label={`Schematic of the ${CORRIDOR_LENGTH_KM} kilometre corridor with ${detections.length} detections marked`}
       >
@@ -153,6 +156,7 @@ function CorridorMap({ detections, selectedId, onSelect }) {
           )
         })}
       </svg>
+      </div>
 
       <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-100 pt-3 text-xs text-slate-600">
         {SEVERITY_KEYS.map((key) => (
