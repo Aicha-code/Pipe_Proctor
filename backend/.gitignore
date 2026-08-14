@@ -30,4 +30,22 @@ data/
 # dummy files
 
 docs.txt
+
+## debug files
+debug_db.py
+debug_insert.py
+debug_register.py
+test_api.py
+test_detection_api.py
+get_supabase_detections.py
+insert_supabase_detection.py
+
+# Test and cache
+.pytest_cache/
+
+# Documentation
 docs.md
+
+# Node modules (frontend)
+node_modules/
+
