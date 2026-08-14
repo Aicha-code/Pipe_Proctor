@@ -65,7 +65,7 @@ def normalize_croma(x):
 
         min_value = (
             channel_data.mean()
-            - 2 * channel_data.std()
+            - 2 * channel_data.std() # we use 2, because the original CROMA code uses 2 standard deviations to define the range for normalization.
         )
 
         max_value = (
