@@ -39,6 +39,8 @@ test_api.py
 test_detection_api.py
 get_supabase_detections.py
 insert_supabase_detection.py
+postman_collection.json
+
 
 # Test and cache
 .pytest_cache/
