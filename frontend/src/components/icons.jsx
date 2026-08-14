@@ -62,3 +62,75 @@ export function SpinnerIcon(props) {
     </svg>
   )
 }
+
+export function GaugeIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="M4 18a8 8 0 1 1 16 0" />
+      <path d="m12 18 4.2-5.2" />
+    </svg>
+  )
+}
+
+export function SatelliteIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="M3 12a9 9 0 0 1 9-9M7 12a5 5 0 0 1 5-5" />
+      <circle cx="6.5" cy="17.5" r="3" />
+      <path d="M15 15l6 6" />
+    </svg>
+  )
+}
+
+export function MapPinIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  )
+}
+
+export function SlidersIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="M4 7h10M18 7h2M4 17h4M12 17h8" />
+      <circle cx="16" cy="7" r="2" />
+      <circle cx="10" cy="17" r="2" />
+    </svg>
+  )
+}
+
+export function LayersIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="m12 3 9 5-9 5-9-5 9-5Z" />
+      <path d="m3 14 9 5 9-5" />
+    </svg>
+  )
+}
+
+export function SearchIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m16 16 4.5 4.5" />
+    </svg>
+  )
+}
+
+export function CloseIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  )
+}
+
+export function CheckIcon(props) {
+  return (
+    <svg {...baseProps} {...props}>
+      <path d="m5 12.5 4.5 4.5L19 7" />
+    </svg>
+  )
+}
