@@ -1,18 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from api import auth_router, detection_router
+from auth_helpers.config import settings
 
 ## start the fastapi app
 app = FastAPI(
-     title="Pipe Proctor API",
-     description="Backend API for satellite anomaly detection and dashboard operations",
-     version="1.0.0"
- )
- 
- ## Enable CORS to allow frontend make a request to the backend
+    title="Pipe Proctor API",
+    description="Backend API for satellite anomaly detection and dashboard operations",
+    version="1.0.0",
+)
+
+## Enable CORS to allow the Vercel frontend and local development origins only.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # in production we need to specify specific domains.
+    allow_origins=settings.allowed_origins,
+    allow_origin_regex=r"https://.*\.vercel\.app$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
