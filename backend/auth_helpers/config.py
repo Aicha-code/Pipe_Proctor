@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     SUPABASE_KEY: str = ""
     JWT_SECRET_KEY: str = ""
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    # add cors
     ALLOWED_ORIGINS: str = (
         "https://ab-pipe-proctor.netlify.app,"
         "http://localhost:5173,"
