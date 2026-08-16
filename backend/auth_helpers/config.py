@@ -11,7 +11,8 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = (
         "http://localhost:5173,http://localhost:3000,"
         "http://127.0.0.1:5173,http://127.0.0.1:3000,"
-        "https://pipe-proctor.vercel.app,https://*.vercel.app"
+        "https://ab-pipe-proctor.netlify.app,"
+        "https://pipe-proctor.vercel.app"
     )
 
     @property
