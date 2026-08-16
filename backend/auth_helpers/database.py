@@ -34,6 +34,23 @@ class SupabaseDatabase:
         except Exception:
             return None
 
+    def update_user_profile(self, user_id, user_update):
+        if self.client is None:
+            return None
+        try:
+            response = (
+                self.client.table("users")
+                .update(user_update)
+                .eq("id", user_id)
+                .select("*")
+                .execute()
+            )
+            if response.data and len(response.data) > 0:
+                return response.data[0]
+            return None
+        except Exception:
+            return None
+
     def insert_detection(self, payload):
         if self.client is None:
             return None

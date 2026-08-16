@@ -27,6 +27,12 @@ class UserInfo(BaseModel):
     department_name: str
     created_at: Optional[datetime] = None
 
+class UpdateUserProfile(BaseModel):
+    first_name: Optional[str] = Field(default=None, min_length=1, max_length=50)
+    last_name: Optional[str] = Field(default=None, min_length=1, max_length=50)
+    email_address: Optional[EmailStr] = None
+    department_name: Optional[str] = Field(default=None, min_length=1, max_length=100)
+
 class LoginResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
@@ -139,6 +145,59 @@ class AuthService:
             email_address=user["email"],
             department_name=user["department"],
             created_at=user.get("created_at")
+        )
+
+    @staticmethod
+    def update_current_user_profile(jwt_token, profile_update: UpdateUserProfile):
+        """Update the authenticated user's profile fields in the database."""
+        token_data = decode_jwt_token(jwt_token)
+        if token_data is None:
+            raise HTTPException(status_code=401, detail="Invalid token")
+
+        user_email = token_data.get("sub")
+        if user_email is None:
+            raise HTTPException(status_code=401, detail="Invalid token")
+
+        current_user = supabase_db.find_user_by_email(user_email)
+        if current_user is None:
+            raise HTTPException(status_code=401, detail="User not found")
+
+        updates = {}
+        if profile_update.first_name is not None:
+            first_name = profile_update.first_name.strip()
+            if first_name:
+                updates["fname"] = first_name
+        if profile_update.last_name is not None:
+            last_name = profile_update.last_name.strip()
+            if last_name:
+                updates["lname"] = last_name
+        if profile_update.department_name is not None:
+            department_name = profile_update.department_name.strip()
+            if department_name:
+                updates["department"] = department_name
+        if profile_update.email_address is not None:
+            normalized_email = str(profile_update.email_address).lower().strip()
+            if normalized_email:
+                if normalized_email != current_user.get("email"):
+                    existing_user = supabase_db.find_user_by_email(normalized_email)
+                    if existing_user is not None:
+                        raise HTTPException(status_code=400, detail="This email is already registered")
+                    updates["email"] = normalized_email
+
+        if not updates:
+            raise HTTPException(status_code=400, detail="No profile changes provided")
+
+        updated_user = supabase_db.update_user_profile(current_user["id"], updates)
+        if updated_user is None:
+            raise HTTPException(status_code=500, detail="Failed to update profile")
+
+        return UserInfo(
+            user_id=str(updated_user["id"]),
+            first_name=updated_user.get("fname") or current_user["fname"],
+            last_name=updated_user.get("lname") or current_user["lname"],
+            email_address=updated_user.get("email") or current_user["email"],
+            department_name=updated_user.get("department") or current_user["department"],
+            created_at=updated_user.get("created_at") or current_user.get("created_at")
         )
 
 

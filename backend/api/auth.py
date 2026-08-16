@@ -2,7 +2,7 @@ from fastapi import APIRouter, Header, HTTPException
 from typing import Optional
 
 from auth_helpers import AuthService
-from auth_helpers.service import RegistrationData, LoginData, LoginResponse, UserInfo
+from auth_helpers.service import RegistrationData, LoginData, LoginResponse, UserInfo, UpdateUserProfile
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -34,3 +34,17 @@ def get_my_profile(authorization: Optional[str] = Header(None)):
     
     # get user info
     return AuthService.get_current_user_info(jwt_token)
+
+
+@auth_router.patch("/me", response_model=UserInfo)
+@auth_router.put("/me", response_model=UserInfo)
+def update_my_profile(profile_update: UpdateUserProfile, authorization: Optional[str] = Header(None)):
+    """Update the authenticated user's profile information"""
+    if authorization is None:
+        raise HTTPException(status_code=401, detail="Missing authorization header")
+
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Invalid authorization format")
+
+    jwt_token = authorization.split(" ")[1]
+    return AuthService.update_current_user_profile(jwt_token, profile_update)
