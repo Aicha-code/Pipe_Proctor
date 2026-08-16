@@ -9,8 +9,12 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY: str = ""
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     ALLOWED_ORIGINS: str = (
-        "https://ab-pipe-proctor.netlify.app",
-        "http://localhost:5173"
+        "https://ab-pipe-proctor.netlify.app,"
+        "http://localhost:5173,"
+        "http://localhost:3000,"
+        "http://127.0.0.1:5173,"
+        "http://127.0.0.1:3000,"
+        "https://pipe-proctor.vercel.app"
     )
 
     @property
