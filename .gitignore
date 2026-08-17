@@ -40,6 +40,9 @@ test_detection_api.py
 get_supabase_detections.py
 insert_supabase_detection.py
 postman_collection.json
+test_model_api.py
+test_detection_api.
+test_auth_update.py
 
 # Test and cache
 .pytest_cache/
@@ -49,4 +52,7 @@ docs.md
 
 # Node modules (frontend)
 node_modules/
+
+#model
+CROMA_base.pt
 
