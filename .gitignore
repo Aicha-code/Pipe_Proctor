@@ -56,3 +56,4 @@ node_modules/
 #model
 # CROMA_base.pt
 
+backend/model_app/pretrained_model/CROMA_base.pt
