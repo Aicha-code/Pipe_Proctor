@@ -15,13 +15,53 @@ ALLOWED_CONTENT_TYPES = {
 }
 
 
-@router.post("/change-detection", response_model=ChangeDetectionResponse)
+@router.post(
+    "/change-detection",
+    response_model=ChangeDetectionResponse,
+    status_code=200,
+    summary="Detect anomalies using change detection model",
+    responses={
+        200: {
+            "description": "Anomaly detection successful",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "segment_id": "P1328_SEG_0020",
+                        "anomaly_score": 1.1555836200714111,
+                        "longitude": 2.6275,
+                        "latitude": 6.540285,
+                        "patch_index": 29,
+                        "patch_row": 1,
+                        "patch_col": 13,
+                    }
+                }
+            },
+        },
+        400: {"description": "Invalid input - missing files or segment_id, or invalid file format"},
+        404: {"description": "Segment metadata not found in database"},
+        500: {"description": "Model execution or file processing error"},
+    },
+)
 async def change_detection(
-    reference_image: UploadFile = File(...),
-    current_image: UploadFile = File(...),
-    segment_id: str = Form(...),
+    reference_image: UploadFile = File(..., description="Reference SAR image (TIFF format)"),
+    current_image: UploadFile = File(..., description="Current SAR image (TIFF format)"),
+    segment_id: str = Form(..., description="Unique segment identifier (e.g., P1328_SEG_0020)"),
 ):
-    """Accept two SAR chip images and return the strongest detected change."""
+    """
+    Detect anomalies by comparing two SAR satellite images.
+    
+    **Input Requirements:**
+    - `reference_image`: SAR chip reference image (TIFF format)
+    - `current_image`: SAR chip current/new image (TIFF format)
+    - `segment_id`: Unique segment identifier for geolocation lookup
+    
+    **Processing:**
+    - Both images are processed through the CROMA change detection model
+    - The model identifies the patch with the highest anomaly score
+    - Coordinates are retrieved from segment metadata
+    
+    **Output:** Detailed anomaly detection result with location and patch information
+    """
 
     reference_type = (reference_image.content_type or "").lower()
     current_type = (current_image.content_type or "").lower()

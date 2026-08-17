@@ -54,5 +54,5 @@ docs.md
 node_modules/
 
 #model
-CROMA_base.pt
+# CROMA_base.pt
 

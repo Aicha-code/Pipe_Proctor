@@ -51,3 +51,6 @@ docs.md
 # Node modules (frontend)
 node_modules/
 
+CHANGE_DETECTION_API.md
+#model
+CROMA_base.pt
