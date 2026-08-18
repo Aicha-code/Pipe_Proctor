@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api import auth_router, detection_router
 from auth_helpers.config import settings
+from model_app.routes.change_detection import router as change_detection_router
 
 ## start the fastapi app
 app = FastAPI(
@@ -24,6 +25,9 @@ app.add_middleware(
 ## add the authentication routes
 app.include_router(auth_router, prefix="/api/v1")
 app.include_router(detection_router)
+
+## add the model inference routes (POST /api/v1/change-detection)
+app.include_router(change_detection_router)
 
 ## check the liveness of the backend
 @app.get("/")

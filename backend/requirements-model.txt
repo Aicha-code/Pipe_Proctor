@@ -1,0 +1,17 @@
+# Dependencies for the CROMA change-detection endpoint (POST /api/v1/change-detection).
+#
+# Kept out of requirements.txt on purpose: torch alone exceeds the Vercel
+# serverless bundle limit, so the API deploys there without them and the
+# endpoint reports 503 rather than failing the whole deployment. Install these
+# on a host that can carry them:
+#
+#     pip install -r requirements.txt -r requirements-model.txt
+#
+# torch is pinned to the CPU-only build; drop the index-url line for CUDA.
+--index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://pypi.org/simple
+einops==0.8.2
+numpy==2.5.2
+pandas==3.0.5
+rasterio==1.5.1
+torch==2.13.0+cpu

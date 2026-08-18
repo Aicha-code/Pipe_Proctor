@@ -51,3 +51,9 @@ docs.md
 # Node modules (frontend)
 node_modules/
 
+
+# CROMA weights — 777 MB, fetched from huggingface.co/antofuller/CROMA
+model_app/models/*.pt
+
+# SAR chips copied from the `model` branch for local testing
+chips/

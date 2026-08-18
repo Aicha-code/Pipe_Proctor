@@ -91,6 +91,21 @@ class SupabaseDatabase:
         except Exception:
             return None
 
+    def delete_detection(self, detection_id):
+        """Delete one detection by id. Returns True when a row was removed."""
+        if self.client is None:
+            return False
+        try:
+            response = (
+                self.client.table("detections")
+                .delete()
+                .eq("id", detection_id)
+                .execute()
+            )
+            return bool(response.data)
+        except Exception:
+            return False
+
     def update_detection_status(self, detection_id, anomaly_status):
         if self.client is None:
             return None

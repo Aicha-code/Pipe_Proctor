@@ -5,6 +5,7 @@ from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
 from model_app.schemas.prediction import ChangeDetectionResponse
 from model_app.services import model_service
+from model_app.services.model_service import InvalidImageError
 
 router = APIRouter(prefix="/api/v1", tags=["change-detection"])
 
@@ -55,11 +56,27 @@ async def change_detection(
 
         return ChangeDetectionResponse(**result)
 
+    # A chip the encoder cannot read is a bad upload, not a missing record.
+    except InvalidImageError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    # Only an unknown segment_id reaches here; that genuinely is a 404.
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
+    # Missing torch/rasterio or absent weights mean the model was never
+    # provisioned on this host. That is a deployment state, not a failed run,
+    # so it reports as unavailable rather than as a generic error.
+    except ImportError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=f"Model runtime is not available on this server: {exc}",
+        ) from exc
+
     except FileNotFoundError as exc:
-        raise HTTPException(status_code=500, detail=str(exc)) from exc
+        raise HTTPException(
+            status_code=503, detail=f"Model weights are not available on this server: {exc}"
+        ) from exc
 
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Model execution failed: {str(exc)}") from exc

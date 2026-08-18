@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 
 try:
@@ -22,6 +24,14 @@ MODEL_PATH = os.getenv("CROMA_MODEL_PATH", os.path.join(BASE_DIR, "models", "CRO
 METADATA_PATH = os.getenv("PIPEPROCTOR_METADATA_PATH", os.path.join(BASE_DIR, "data", "chips_metadata_v2.csv"))
 
 model = None
+
+
+class InvalidImageError(ValueError):
+    """A supplied chip is not something the encoder can read.
+
+    Separate from the plain ValueError raised for an unknown segment so the API
+    can tell a bad upload (client error) from a missing record (404).
+    """
 
 def _load_metadata():
     if pd is None:
@@ -86,7 +96,15 @@ def load_image(image_path: str) -> torch.Tensor:
         image = src.read()
 
     if image.shape[0] != 2:
-        raise ValueError("Image must contain exactly 2 SAR bands (VV and VH).")
+        raise InvalidImageError(
+            f"Image must contain exactly 2 SAR bands (VV and VH), not {image.shape[0]}."
+        )
+
+    if image.shape[1:] != (128, 128):
+        height, width = image.shape[1], image.shape[2]
+        raise InvalidImageError(
+            f"Image must be 128 x 128 px to match the encoder, not {width} x {height}."
+        )
 
     image_tensor = torch.from_numpy(image)
     image_normalized = normalize_croma(image_tensor)

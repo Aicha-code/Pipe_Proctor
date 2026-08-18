@@ -231,6 +231,31 @@ def update_detection_status(detection_id: str, payload: DetectionUpdateStatus):
     return detection
 
 
+@detection_router.delete(
+    "/detections/{detection_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    summary="Delete a detection",
+)
+def delete_detection(detection_id: str):
+    """Remove a detection permanently.
+
+    Used to retire records that should never have been stored -- test rows, or
+    detections whose coordinates put them nowhere near the corridor.
+    """
+    removed = False
+
+    if supabase_db.client is not None:
+        removed = supabase_db.delete_detection(detection_id)
+
+    if _detection_store.pop(detection_id, None) is not None:
+        removed = True
+
+    if not removed:
+        raise HTTPException(status_code=404, detail="Detection not found")
+
+    return None
+
+
 @detection_router.get(
     "/notifications/stream",
     summary="Stream dashboard notifications as SSE",
